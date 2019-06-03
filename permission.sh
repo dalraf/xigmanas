@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/sh
 find ${1} -type f  -exec setfacl -m everyone@:full_set::allow {} \;
 find ${1} -type f  -exec setfacl -m group@:full_set::allow {} \;
 find ${1} -type f  -exec setfacl -m owner@:full_set::allow {} \;
