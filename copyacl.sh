@@ -1,6 +1,6 @@
-!#/bin/bash
-DIR1=$1
-DIR2=$2
+#!/bin/bash
+DIR1=${1}
+DIR2=${2}
 
 getfacl -q $DIR1 > /tmp/acltmp
 setfacl -M /tmp/acltmp $DIR2 
