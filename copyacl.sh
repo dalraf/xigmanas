@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 DIR1=${1}
 DIR2=${2}
 
