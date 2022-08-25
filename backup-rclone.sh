@@ -1,3 +1,3 @@
 #!/bin/sh
-/usr/local/bin/rclone -vv --log-file=/var/log/backup-rclone.log sync /mnt/dadoscoopaco/ encrypt:/
+/usr/local/bin/rclone -v --config /mnt/dados/scripts/rclone.conf --syslog sync /mnt/dados/ encrypt:/
 
