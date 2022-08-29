@@ -2,24 +2,10 @@ import subprocess
 import os
 from pathlib import Path
 import datetime
-
-rclone_binary = "/usr/local/bin/rclone"
-rclone_config_file = "/mnt/dados/scripts/rclone.conf"
-rclone_log_file = "/var/log/backup-rclone.log"
-rclone_origem = "/mnt/dados/"
-rclone_dest = "encrypt:/"
-
-rsync_password = "passswd"
-rsync_user = "administrador"
-rsync_windows_host = "192.168.0.1"
-rsync_options = "--exclude 'Banco'"
-rsync_origem = "/cygdrive/e/pasta/"
-rsync_dest = "rsync://192.168.0.2:/Backup/pasta/"
-rsync_log_file = "/var/log/backup-rsync.log"
-
+from vars import rsync_windows, rclone_backup
+from config_backup import *
 
 status_file = "/var/log/backup_status"
-
 
 def compress_file(file):
     subprocess.call(f"gzip {file}", shell=True)
@@ -62,6 +48,7 @@ def run_backup_rsync():
 
 
 def run_backup():
+    if rsync_windows in lista
     rsync_status = run_backup_rsync()
     rclone_status = run_backup_rclone()
     status = rclone_status + rsync_status
