@@ -7,6 +7,7 @@ from config_backup import *
 
 status_file = "/var/log/backup_status"
 
+
 def compress_file(file):
     subprocess.call(f"gzip {file}", shell=True)
 
@@ -42,17 +43,20 @@ def run_backup_rclone():
 def run_backup_rsync():
     exec_status = subprocess.call(
         f"sshpass -p {rsync_password} ssh {rsync_user}@{rsync_windows_host} 'rsync -rtv --delete {rsync_options} {rsync_origem} {rsync_dest}' > {rsync_log_file} 2>&1",
-        shell=True
+        shell=True,
     )
     return exec_status
 
 
 def run_backup():
-    if rsync_windows in lista
-    rsync_status = run_backup_rsync()
-    rclone_status = run_backup_rclone()
-    status = rclone_status + rsync_status
-    with open(status_file, 'w') as f:
+    status = 0
+    if rsync_windows in lista_funcoes:
+        rsync_status = run_backup_rsync()
+        status += rsync_status
+    if rclone_backup in lista_funcoes:
+        rclone_status = run_backup_rclone()
+        status += rclone_status
+    with open(status_file, "w") as f:
         f.write(str(status))
     if datetime.datetime.today().day in [7, 14, 28]:
         rotate_file(rclone_log_file)
