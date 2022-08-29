@@ -2,7 +2,7 @@ from vars import rsync_windows, rclone_backup
 
 # Lista de funcoes de backup
 # Exemplo: lista_funcoes = [rsync_windows, rclone_backup]
-lista_funcoes = [rsync_windows, rsync_windows]
+lista_funcoes = [rsync_windows, rclone_backup]
 
 #Config do rsync windows
 rsync_password = "passswd"
