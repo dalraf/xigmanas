@@ -10,6 +10,7 @@ lista_acl_obj = [
 
 caminho = sys.argv[1]
 
-
 for obj in lista_acl_obj:
-    subprocess.call(f'{obj}:rwxpDdaARWcCo-:fd-----:allow {caminho}', shell=True)
+    comando = f'setfacl -R -m {obj}:rwxpDdaARWcCo-:fd-----:allow {caminho}'
+    print(comando)
+    subprocess.call(comando, shell=True)
