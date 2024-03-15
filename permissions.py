@@ -1,17 +1,19 @@
-import subprocess
+iimport subprocess
 import sys
-from pathlib import Path
 
-lista_acl_obj = [
-    'user:root',
-    'owner@',
-    'group@',
-    'everyone@',
-]
+def set_permissions(directory):
+    subprocess.run(["setfacl", "-R", "-b", directory])
+    subprocess.run(["chown", "-R", "root", directory])
+    subprocess.run(["chgrp", "-R", "wheel", directory])
+    subprocess.run(["setfacl", "-R", "-m", "group@:full_set:fd:allow", directory])
+    subprocess.run(["setfacl", "-R", "-m", "owner@:full_set:fd:allow", directory])
+    subprocess.run(["setfacl", "-R", "-m", "everyone@:full_set:fd:allow", directory])
+    subprocess.run(["setfacl", "-R", "-m", "group:usuários_do_domínio:rwxpDdaARWcCos:fd-----:allow", directory])
 
-caminho = Path(f'"{sys.argv[1]}"')
-
-for obj in lista_acl_obj:
-    comando = f'setfacl -R -m {obj}:rwxpDdaARWcCo-:fd-----:allow {caminho}'
-    print(comando)
-    subprocess.call(comando, shell=True)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <directory>")
+        sys.exit(1)
+    
+    directory = sys.argv[1]
+    set_permissions(directory)
