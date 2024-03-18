@@ -1,4 +1,4 @@
-iimport subprocess
+import subprocess
 import sys
 
 def set_permissions(directory):
